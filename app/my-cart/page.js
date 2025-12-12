@@ -124,7 +124,7 @@ const CartPage = () => {
         return (
             <div className="min-h-screen bg-gray-50 flex flex-col">
                 <Navbar />
-                <div className="flex-grow container mx-auto px-3 sm:px-4 py-10 sm:py-16 lg:py-20 flex flex-col items-center justify-center">
+                <div className="grow container mx-auto px-3 sm:px-4 py-10 sm:py-16 lg:py-20 flex flex-col items-center justify-center">
                     <div className="max-w-md w-full text-center bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-12 shadow-sm border border-gray-200">
                         <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                             <svg className="w-7 h-7 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -149,7 +149,7 @@ const CartPage = () => {
         <div className="min-h-screen text-black bg-gray-50 flex flex-col">
             <Navbar />
 
-            <main className="flex-grow container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
+            <main className="grow container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
                     <div>
@@ -171,7 +171,7 @@ const CartPage = () => {
                                 <div key={item._id} className={`p-3 sm:p-4 lg:p-6 ${index !== cartItems.length - 1 ? 'border-b border-gray-100' : ''}`}>
                                     <div className="flex gap-3 sm:gap-4 lg:gap-6">
                                         {/* Product Image */}
-                                        <Link href={`/product/${item.productId}`} className="flex-shrink-0">
+                                        <Link href={`/product/${item.productId}`} className="shrink-0">
                                             <div className="w-20 h-20 sm:w-28 sm:h-28 lg:w-36 lg:h-36 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
                                                 <Image
                                                     src={item.image}
@@ -194,7 +194,7 @@ const CartPage = () => {
                                                     {/* Specs - Horizontal scroll on mobile */}
                                                     <div className="flex gap-1.5 sm:gap-2 mb-2 overflow-x-auto pb-1 scrollbar-hide">
                                                         {Object.entries(item.selectedVariant).map(([key, value]) => (
-                                                            <div key={key} className="flex-shrink-0 flex items-center gap-1 sm:gap-1.5 bg-blue-50 border border-blue-100 px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg">
+                                                            <div key={key} className="shrink-0 flex items-center gap-1 sm:gap-1.5 bg-blue-50 border border-blue-100 px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg">
                                                                 <span className="font-medium text-gray-700 capitalize text-[10px] sm:text-xs">{key}:</span>
                                                                 <span className="text-blue-600 font-semibold text-[10px] sm:text-xs">{value}</span>
                                                             </div>
@@ -204,7 +204,7 @@ const CartPage = () => {
                                                     {/* Stock Warning */}
                                                     {limit[item._id] && (
                                                         <div className="flex items-center gap-1 text-amber-600 text-[10px] sm:text-xs bg-amber-50 px-2 py-1 sm:py-1.5 rounded-md border border-amber-100 w-fit">
-                                                            <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                                             </svg>
                                                             <span>Only {item.stockCount} left</span>
@@ -215,7 +215,7 @@ const CartPage = () => {
                                                 {/* Delete Button */}
                                                 <button
                                                     onClick={() => removeItem(item.productId, item.selectedVariant)}
-                                                    className="p-1.5 sm:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 active:bg-red-100 rounded-lg transition-colors flex-shrink-0"
+                                                    className="p-1.5 sm:p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 active:bg-red-100 rounded-lg transition-colors shrink-0"
                                                     aria-label="Remove item"
                                                     title="Remove item"
                                                 >
@@ -297,14 +297,14 @@ const CartPage = () => {
                             ) : (
                                 <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
                                     <div className="flex items-center gap-2">
-                                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                         <span className="text-green-800 font-medium text-xs sm:text-sm truncate">&quot;{promoCode}&quot; applied</span>
                                     </div>
                                     <button
                                         onClick={removePromo}
-                                        className="text-green-600 hover:text-green-800 font-medium text-xs sm:text-sm flex-shrink-0"
+                                        className="text-green-600 hover:text-green-800 font-medium text-xs sm:text-sm shrink-0"
                                     >
                                         Remove
                                     </button>

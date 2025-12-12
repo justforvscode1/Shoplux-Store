@@ -345,6 +345,38 @@ export default function ProductPage({ params }) {
     }
   }
 
+  // DELETE PRODUCT
+  const handleDelete = async () => {
+    if (!window.confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const res = await fetch('/api/products', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productid: product.productid }),
+      });
+
+      if (res.ok) {
+        toast.success('Product deleted successfully');
+        router.push('/');
+        router.refresh();
+      } else {
+        const data = await res.json();
+        toast.error(data.error || 'Failed to delete product');
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error('An error occurred while deleting');
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -362,11 +394,11 @@ export default function ProductPage({ params }) {
                     alt={`Product Image ${pictureno + 1}`}
                     width={500}
                     height={500}
-                    className="w-full h-full object-cover bg-gradient-to-br from-gray-100 to-gray-200"
+                    className="w-full h-full object-cover bg-linear-to-br from-gray-100 to-gray-200"
                     unoptimized={images[pictureno]?.startsWith('/uploads')}
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                  <div className="w-full h-full bg-linear-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                     <span className="text-gray-400 text-sm sm:text-base lg:text-lg">No Image Available</span>
                   </div>
                 )}
@@ -415,7 +447,7 @@ export default function ProductPage({ params }) {
                       onClick={() => setPictureNo(idx)}
                       aria-label={`View image ${idx + 1}`}
                       title={`View image ${idx + 1}`}
-                      className={`flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 lg:w-full lg:aspect-square bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md border-2 overflow-hidden transition-all duration-300 ${pictureno === idx
+                      className={`shrink-0 w-16 h-16 sm:w-20 sm:h-20 lg:w-full lg:aspect-square bg-white rounded-lg sm:rounded-xl shadow-sm sm:shadow-md border-2 overflow-hidden transition-all duration-300 ${pictureno === idx
                         ? 'border-blue-500 ring-1 sm:ring-2 ring-blue-200 scale-105 shadow-md sm:shadow-lg'
                         : 'border-gray-200 hover:border-gray-300 hover:shadow-md sm:hover:shadow-lg active:scale-95'
                         }`}
@@ -441,6 +473,18 @@ export default function ProductPage({ params }) {
                 <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 leading-tight">
                   {product.name}
                 </h1>
+
+                {data?.user?.role === 'admin' && (
+                  <button
+                    onClick={handleDelete}
+                    className="mt-2 text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-1 transition-colors"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Delete Product
+                  </button>
+                )}
                 {filteredreviews.length > 0 ? (
                   <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                     {renderStars(avgrating, 'text-sm sm:text-base lg:text-lg')}
@@ -568,7 +612,7 @@ export default function ProductPage({ params }) {
                 <button
                   onClick={addingtocart}
                   disabled={isAddingToCart || stockCount === 0 || !isCombinationValid}
-                  className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl lg:hover:shadow-2xl active:scale-[0.98] disabled:hover:scale-100 disabled:cursor-not-allowed shadow-lg sm:shadow-xl text-sm sm:text-base lg:text-lg"
+                  className="w-full bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-3 sm:py-4 lg:py-5 px-4 sm:px-6 lg:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:shadow-xl lg:hover:shadow-2xl active:scale-[0.98] disabled:hover:scale-100 disabled:cursor-not-allowed shadow-lg sm:shadow-xl text-sm sm:text-base lg:text-lg"
                 >
                   {isAddingToCart ? (
                     <span className="flex items-center justify-center">

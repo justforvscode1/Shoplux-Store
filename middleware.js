@@ -13,7 +13,6 @@ export const middleware = withAuth(
 
                 // Only log page visits, skip API calls
                 if (!pathname.startsWith('/')) {
-                    console.log('the path is', pathname);
                 }
 
                 if (
@@ -26,6 +25,10 @@ export const middleware = withAuth(
 
                 if (pathname === "/") {
                     return true;
+                }
+
+                if (pathname.startsWith("/add-product")) {
+                    return token?.role === "admin";
                 }
 
                 return !!token;

@@ -168,7 +168,7 @@ export default function UserOrdersDashboard() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
 
-      <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Track Orders</h1>
           <p className="text-gray-600">Track and manage your recent orders</p>
@@ -317,7 +317,7 @@ export default function UserOrdersDashboard() {
                           {progressSteps.map((step) => (
                             <div key={step.key} className="flex md:flex-col items-center md:flex-1 relative z-10 gap-4 md:gap-2">
                               {/* Indicator Dot */}
-                              <div className={`w-9 h-9 flex items-center justify-center rounded-full border-2 bg-white transition-colors duration-300 flex-shrink-0
+                              <div className={`w-9 h-9 flex items-center justify-center rounded-full border-2 bg-white transition-colors duration-300 shrink-0
                                 ${step.active
                                   ? step.cancelled
                                     ? 'border-red-500 text-red-500'
@@ -367,7 +367,7 @@ export default function UserOrdersDashboard() {
                             <div className="space-y-3">
                               {order.orderedItems.map((item) => (
                                 <div key={item._id} className="flex gap-4 p-3 bg-white rounded-lg border border-gray-100">
-                                  <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden flex-shrink-0">
+                                  <div className="w-20 h-20 bg-gray-100 rounded-md overflow-hidden shrink-0">
                                     <Image
                                       src={item.image}
                                       alt={item.name}

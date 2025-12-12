@@ -202,7 +202,7 @@ export default function CompletedOrdersPage() {
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Navbar />
 
-            <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <main className="grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {/* Header Section */}
                 <div className="mb-6 sm:mb-8 lg:mb-10">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
@@ -332,7 +332,7 @@ export default function CompletedOrdersPage() {
                                     <p className="text-[10px] sm:text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1 sm:mb-2 truncate">{stat.label}</p>
                                     <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 truncate">{stat.value}</p>
                                 </div>
-                                <div className="p-1.5 sm:p-2 lg:p-3 bg-blue-50 rounded-lg flex-shrink-0 ml-2">
+                                <div className="p-1.5 sm:p-2 lg:p-3 bg-blue-50 rounded-lg shrink-0 ml-2">
                                     <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d={stat.icon} />
                                     </svg>
@@ -366,7 +366,7 @@ export default function CompletedOrdersPage() {
                                         </div>
                                         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 text-xs sm:text-sm">
                                             <div className="flex items-center gap-1.5 text-gray-600">
-                                                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                 </svg>
                                                 <span className="truncate">{formatDate(order.createdAt)}</span>
@@ -380,7 +380,7 @@ export default function CompletedOrdersPage() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex-shrink-0">
+                                    <div className="shrink-0">
                                         <svg
                                             className={`w-4 h-4 sm:w-5 sm:h-5 text-blue-600 transform transition-transform duration-200 ${expandedOrder === order.orderId ? 'rotate-180' : ''}`}
                                             fill="none"
@@ -405,7 +405,7 @@ export default function CompletedOrdersPage() {
                                         <div className="space-y-2 sm:space-y-3">
                                             {order.orderedItems?.map((item) => (
                                                 <div key={item._id} className="flex items-start gap-2 sm:gap-3 p-2 sm:p-3 bg-gray-50 rounded-lg border border-gray-200">
-                                                    <Link href={`/product/${item.productId}`} className="flex-shrink-0">
+                                                    <Link href={`/product/${item.productId}`} className="shrink-0">
                                                         <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-lg border border-gray-200 overflow-hidden">
                                                             <Image src={item.image} alt={item.name} width={60} height={60} className="w-full h-full object-contain" unoptimized={item.image?.startsWith('/uploads')} />
                                                         </div>
@@ -426,7 +426,7 @@ export default function CompletedOrdersPage() {
                                                             ))}
                                                         </div>
                                                     </div>
-                                                    <div className="text-right flex-shrink-0">
+                                                    <div className="text-right shrink-0">
                                                         <p className="text-sm sm:text-base font-bold text-gray-900">${item.price?.toFixed(2)}</p>
                                                         <p className="text-[10px] sm:text-xs text-gray-500">
                                                             Total: ${((item.price || 0) * (item.quantity || 0)).toFixed(2)}

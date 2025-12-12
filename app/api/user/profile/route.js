@@ -60,8 +60,8 @@ export async function DELETE(req) {
   try {
     await dbConnect();
     const UserEmail = await req.json();
-    console.log(UserEmail);
-    
+
+
     if (!UserEmail) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }

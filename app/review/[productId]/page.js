@@ -5,114 +5,6 @@ import Image from 'next/image';
 import LoadingScreen from '@/components/LoadingScreen';
 import { useState, use, useEffect } from 'react';
 
-// Mock data - in production, this would come from your API/database
-
-
-// const filteredreviews = [
-//     {
-//         _id: "rev001",
-//         userId: {
-//             _id: "user001",
-//             name: "Sarah Mitchell",
-//             avatar: "SM"
-//         },
-//         productId: "691f5fb91ec6dcc804ad9bd9",
-//         rating: 5,
-//         title: "Best Noise Cancellation I've Ever Experienced",
-//         comment: "I've been using these headphones for my daily commute for two months now, and they're absolutely phenomenal. The noise cancellation is industry-leading - I can barely hear the subway trains anymore. The sound quality is crisp and balanced, perfect for both music and podcasts. Battery life easily lasts me a full week of daily use. The multipoint connection works flawlessly between my laptop and phone. Completely worth the investment for anyone who values audio quality and peace.",
-//         images: [],
-//         verified: true,
-//         status: "approved",
-//         helpfulCount: 89,
-//         createdAt: "2024-09-15T14:22:00Z"
-//     },
-//     {
-//         _id: "rev002",
-//         userId: {
-//             _id: "user002",
-//             name: "James Anderson",
-//             avatar: "JA"
-//         },
-//         productId: "691f5fb91ec6dcc804ad9bd9",
-//         rating: 5,
-//         title: "Premium Quality for Professionals",
-//         comment: "As a music producer, I'm very particular about audio equipment. The WH-1000XM5 delivers exceptional sound clarity with LDAC codec support. The frequency response is well-balanced, and the noise cancellation doesn't affect the audio quality like some competitors. Comfort is outstanding - I wear these for 8+ hour sessions without discomfort. The speak-to-chat feature is genius for quick conversations. Only minor downside is they don't fold as compactly as the previous model.",
-//         images: [],
-//         verified: true,
-//         status: "approved",
-//         helpfulCount: 67,
-//         createdAt: "2024-10-02T09:45:00Z"
-//     },
-//     {
-//         _id: "rev003",
-//         userId: {
-//             _id: "user003",
-//             name: "Maria Garcia",
-//             avatar: "MG"
-//         },
-//         productId: "691f5fb91ec6dcc804ad9bd9",
-//         rating: 4,
-//         title: "Excellent, But Pricey",
-//         comment: "These are my first premium headphones, and I'm impressed. The noise cancellation is incredible - perfect for open office environments. Sound quality is excellent for casual listening, though audiophiles might want something more neutral. The 30-hour battery life claim is accurate. My only complaints are the high price point and the case feels a bit bulky for travel. Still, the comfort and performance make them worth considering if you're in the market for premium wireless headphones.",
-//         images: [],
-//         verified: true,
-//         status: "approved",
-//         helpfulCount: 52,
-//         createdAt: "2024-10-18T16:30:00Z"
-//     },
-//     {
-//         _id: "rev004",
-//         userId: {
-//             _id: "user004",
-//             name: "David Chen",
-//             avatar: "DC"
-//         },
-//         productId: "691f5fb91ec6dcc804ad9bd9",
-//         rating: 5,
-//         title: "Perfect for Frequent Travelers",
-//         comment: "I fly internationally twice a month, and these headphones have been a game-changer. The noise cancellation makes long flights so much more bearable - engine noise just disappears. The battery lasts multiple flights without charging. Comfort is exceptional even on 12+ hour flights. The quick attention mode is perfect for flight attendant interactions. The carry case is well-designed and protective. If you travel frequently, these are absolutely worth every penny.",
-//         images: [],
-//         verified: true,
-//         status: "approved",
-//         helpfulCount: 45,
-//         createdAt: "2024-11-01T11:15:00Z"
-//     },
-//     {
-//         _id: "rev005",
-//         userId: {
-//             _id: "user005",
-//             name: "Emily Roberts",
-//             avatar: "ER"
-//         },
-//         productId: "691f5fb91ec6dcc804ad9bd9",
-//         rating: 5,
-//         title: "Upgraded from XM4 - Worth It",
-//         comment: "I owned the XM4 and debated whether to upgrade. The XM5 is noticeably better in every way. Noise cancellation is improved, especially with wind noise. The new design is more comfortable for extended wear - the lighter weight makes a difference. Sound quality has a cleaner, more refined profile. Call quality is significantly better thanks to the improved microphones. The app integration works smoothly with customizable EQ settings. Highly recommend the upgrade if you're on the fence.",
-//         images: [],
-//         verified: true,
-//         status: "approved",
-//         helpfulCount: 38,
-//         createdAt: "2024-11-08T13:50:00Z"
-//     },
-//     {
-//         _id: "rev006",
-//         userId: {
-//             _id: "user006",
-//             name: "Michael Thompson",
-//             avatar: "MT"
-//         },
-//         productId: "691f5fb91ec6dcc804ad9bd9",
-//         rating: 4,
-//         title: "Great Headphones with Minor Quirks",
-//         comment: "Overall very satisfied with these headphones. Sound quality is fantastic, noise cancellation works brilliantly, and they're incredibly comfortable. The adaptive sound control adjusts automatically based on your environment which is convenient. However, I've noticed occasional Bluetooth connectivity hiccups with my Windows laptop. The touch controls take some getting used to, and I sometimes trigger them accidentally. Despite these minor issues, they're still an excellent choice for premium wireless headphones.",
-//         images: [],
-//         verified: false,
-//         status: "approved",
-//         helpfulCount: 29,
-//         createdAt: "2024-11-15T10:20:00Z"
-//     }
-// ];
-
 export default function ReviewsPage({ params }) {
     const productId = decodeURIComponent(use(params).productId);
     const [sortBy, setSortBy] = useState('recent');
@@ -130,7 +22,6 @@ export default function ReviewsPage({ params }) {
             const response = await product.json()
             const mathceditem = response.filter(i => i.productid === productId)
             setmatchedItem(mathceditem)
-            console.log("matched item", mathceditem)
 
             const reviews = await fetch("/api/review")
             const reviewResponse = await reviews.json()
@@ -167,13 +58,12 @@ export default function ReviewsPage({ params }) {
     };
 
     const ratingDistribution = getRatingDistribution();
-    // const displayImage = matchedItem?.variants[0].images[0] 
-    // console.log("display image", displayImage);
+    
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Navbar />
-            <main className="flex-grow">
+            <main className="grow">
                 {/* Header */}
                 <div className="bg-white border-b-2 border-blue-600 shadow-sm">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
@@ -296,7 +186,7 @@ export default function ReviewsPage({ params }) {
                                         {/* Review Header */}
                                         <div className="flex items-start justify-between mb-4 flex-wrap gap-3">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
+                                                <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg shrink-0">
                                                     {review.userId.avatar}
                                                 </div>
                                                 <div>

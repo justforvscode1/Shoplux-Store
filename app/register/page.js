@@ -33,7 +33,6 @@ export default function Page() {
             })
 
             const data = await res.json()
-            console.log("Registration response:", data, res.ok)
 
             if (!res.ok) {
                 seterror(data.error)
@@ -48,7 +47,7 @@ export default function Page() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-12">
+        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-12">
             <div className="w-full max-w-md">
                 <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
                     <div className="text-center mb-8">
@@ -73,7 +72,7 @@ export default function Page() {
                         </div>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                              Last Name
+                                Last Name
                             </label>
                             <input
                                 type="text"
@@ -132,12 +131,12 @@ export default function Page() {
 
                         <button
                             type="submit"
-                            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                            className="w-full bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                         >
                             Register
                         </button>
                     </form>
-                     <div className="text-red-500 text-center">{error}</div>
+                    <div className="text-red-500 text-center">{error}</div>
                     <div className="mt-6 text-center text-sm text-gray-600">
                         Already have an account?{' '}
                         <Link href="/login" className="font-semibold text-blue-600 hover:text-blue-700 transition-colors">

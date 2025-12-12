@@ -36,7 +36,6 @@ const VerifiedIcon = ({ className = "w-4 h-4" }) => (
 
 export default function AccountProfile() {
   const { data: session, status } = useSession();
-  // console.log(session)
   const router = useRouter();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -100,7 +99,6 @@ export default function AccountProfile() {
         body: JSON.stringify(session.user.email)
       });
       const check = await response.json()
-      console.log(check)
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.error || 'Failed to delete account');
@@ -158,7 +156,7 @@ export default function AccountProfile() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
-      <main className="flex-grow">
+      <main className="grow">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
           {/* Header Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
@@ -170,7 +168,7 @@ export default function AccountProfile() {
                     {user?.isActive ? 'Active' : 'Inactive'}
                   </p>
                 </div>
-                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0 ml-3">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-green-50 rounded-lg flex items-center justify-center shrink-0 ml-3">
                   <div className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full ${user?.isActive ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                 </div>
               </div>
@@ -184,7 +182,7 @@ export default function AccountProfile() {
                     {user?.isEmailVerified ? 'Verified' : 'Pending'}
                   </p>
                 </div>
-                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0 ml-3">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-blue-50 rounded-lg flex items-center justify-center shrink-0 ml-3">
                   {user?.isEmailVerified ? (
                     <VerifiedIcon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                   ) : (
@@ -204,7 +202,7 @@ export default function AccountProfile() {
                     {user?.createdAt ? new Date(user.createdAt).getFullYear() : 'N/A'}
                   </p>
                 </div>
-                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-purple-50 rounded-lg flex items-center justify-center flex-shrink-0 ml-3">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 bg-purple-50 rounded-lg flex items-center justify-center shrink-0 ml-3">
                   <svg className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -376,7 +374,7 @@ export default function AccountProfile() {
                           connected && (
                             <div key={provider} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200 gap-3 sm:gap-4">
                               <div className="flex items-center space-x-3 sm:space-x-4">
-                                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 flex items-center justify-center flex-shrink-0">
+                                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white rounded-lg border border-gray-200 flex items-center justify-center shrink-0">
                                   {getProviderIcon(provider)}
                                 </div>
                                 <div className="min-w-0">

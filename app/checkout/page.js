@@ -12,6 +12,12 @@ import Footer from '@/components/Footer';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
+const generateOrderId = () => {
+    const timestamp = Date.now().toString(36);
+    const random = Math.random().toString(36).substring(2, 11);
+    return `ORD-${timestamp}-${random}`.toUpperCase();
+};
+
 const CheckoutPage = () => {
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [pendingOrderId, setPendingOrderId] = useState(null);
@@ -60,11 +66,7 @@ const CheckoutPage = () => {
         router.back()
     }
 
-    const generateOrderId = () => {
-        const timestamp = Date.now().toString(36);
-        const random = Math.random().toString(36).substr(2, 9);
-        return `ORD-${timestamp}-${random}`.toUpperCase();
-    };
+
 
     const createOrderInDatabase = async (orderId, paymentStatus) => {
         const orderedItems = orderItems.map(({ _id, ...item }) => item)
@@ -145,7 +147,7 @@ const CheckoutPage = () => {
 
             return false;
         } catch (error) {
-            console.log(error)
+            console.error(error)
             toast.error("Error placing order", { position: "top-center" })
             setIsProcessingPayment(false);
             return false;
@@ -166,7 +168,7 @@ const CheckoutPage = () => {
                 setIsProcessingPayment(false);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             toast.error('Error completing order', { position: 'top-center' });
             setIsProcessingPayment(false);
         }
@@ -181,7 +183,7 @@ const CheckoutPage = () => {
         <div className="min-h-screen text-black bg-gray-50 flex flex-col">
             <Navbar />
 
-            <main className="flex-grow container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
+            <main className="grow container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6 lg:py-8">
                 {/* Header with back button */}
                 <div className="mb-6 flex items-center justify-between">
                     <button onClick={handleback} className="text-gray-600 flex items-center hover:text-gray-900 active:text-gray-950 transition-colors">
@@ -415,7 +417,7 @@ const CheckoutPage = () => {
                             {paymentMethod === 'cod' && (
                                 <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 sm:p-4 mt-3 sm:mt-4">
                                     <div className="flex items-start gap-2">
-                                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                                         </svg>
                                         <div>
@@ -439,7 +441,7 @@ const CheckoutPage = () => {
                                     const productSlug = item.name?.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
                                     return (
                                         <div key={item._id} className="flex items-center gap-3 pb-3 border-b border-gray-100 last:border-b-0">
-                                            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gray-100 rounded-lg flex items-center justify-center shrink-0">
                                                 <Image src={item.image || '/uploads/products/' + productSlug + '.png'} alt={item.name} width={50} height={50} unoptimized />
                                             </div>
                                             <div className="flex-1 min-w-0">
@@ -447,7 +449,7 @@ const CheckoutPage = () => {
                                                 <h4 className="text-xs sm:text-sm font-semibold text-gray-900 truncate">{item.name}</h4>
                                                 <p className="text-[10px] sm:text-xs text-gray-500">Qty: {item.quantity}</p>
                                             </div>
-                                            <div className="text-right flex-shrink-0">
+                                            <div className="text-right shrink-0">
                                                 <p className="text-sm sm:text-base font-semibold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
                                             </div>
                                         </div>

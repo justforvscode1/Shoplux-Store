@@ -154,7 +154,6 @@ const AddProductPage = () => {
                 formData.append('files', img.file);
             }
         });
-        console.log(formData);
         const response = await fetch('/api/upload', {
             method: 'POST',
             body: formData,

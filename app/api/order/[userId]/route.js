@@ -19,7 +19,7 @@ export async function POST(req, { params }) {
     try {
         const { userId } = await params;
         const body = await req.json();
-        console.log(body);
+
         // Validation
         if (!body) {
             return NextResponse.json({ error: "body is required" }, { status: 400 });
@@ -75,7 +75,7 @@ export async function DELETE(req, { params }) {
     try {
         await dbConnect();
         const UserId = await req.json();
-        console.log(UserId)
+
         if (!UserId) {
             return NextResponse.json({ error: "userId is required" }, { status: 400 });
 

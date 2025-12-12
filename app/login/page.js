@@ -7,22 +7,21 @@ import Link from 'next/link'
 export default function Page() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState (null)
+    const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [loadingProvider, setLoadingProvider] = useState(null);
 
     const router = useRouter()
-    const { data, status } = useSession() 
-    console.log(data, status)
+    const { data, status } = useSession()
     const handlesubmit = async (e) => {
         e.preventDefault()
         try {
             setIsLoading(true)
             setError(null)
-if (email.trim()==='' || password.trim()==='') {
-    setError("fields are empty ")
-    return
-}
+            if (email.trim() === '' || password.trim() === '') {
+                setError("fields are empty ")
+                return
+            }
             const res = await signIn("credentials", {
                 email,
                 password,
@@ -33,7 +32,7 @@ if (email.trim()==='' || password.trim()==='') {
             } else {
                 setTimeout(() => {
 
-                    console.log("Redirecting to home...")
+
                 }, 1000);
 
                 // router.refresh()
@@ -65,7 +64,7 @@ if (email.trim()==='' || password.trim()==='') {
     }, [status, router]);
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50 px-4 py-12">
+        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-purple-50 via-indigo-50 to-blue-50 px-4 py-12">
             <div className="w-full max-w-md">
                 <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
                     <div className="text-center mb-8">
@@ -104,21 +103,21 @@ if (email.trim()==='' || password.trim()==='') {
                             />
                         </div>
 
-                        
+
 
                         <button
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-linear-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {isLoading ? 'Logging in...' : 'Login'}
                         </button>
                     </form>
                     {error && (
-                            <div className="text-red-500 text-center text-sm mb-4">
-                                {error}
-                            </div>
-                        )}
+                        <div className="text-red-500 text-center text-sm mb-4">
+                            {error}
+                        </div>
+                    )}
                     <div className="mt-6 text-center text-sm text-gray-600">
                         Don&apos;t have an account?{" "}
                         <Link href="/register" className="font-semibold text-purple-600 hover:text-purple-700 transition-colors">
@@ -127,9 +126,9 @@ if (email.trim()==='' || password.trim()==='') {
                     </div>
                     <div className="w-full max-w-xs mx-auto py-5">
                         <div className="flex items-center mb-5">
-                            <div className="flex-grow border-t border-gray-300"></div>
+                            <div className="grow border-t border-gray-300"></div>
                             <span className="mx-4 text-sm text-gray-500 font-medium">Sign in with</span>
-                            <div className="flex-grow border-t border-gray-300"></div>
+                            <div className="grow border-t border-gray-300"></div>
                         </div>
 
                         <div className="space-y-3">

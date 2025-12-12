@@ -2,8 +2,10 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
+    const { data: session } = useSession();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(null);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -95,7 +97,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex items-center gap-3 justify-between h-14 sm:h-16">
                     {/* Logo */}
-                    <div className="flex items-center flex-shrink-0">
+                    <div className="flex items-center shrink-0">
                         <Link href={'/'} onClick={closeMobileMenu}>
                             <h1 className="text-xl sm:text-2xl font-bold text-blue-600 cursor-pointer">
                                 ShopLux
@@ -198,7 +200,7 @@ const Navbar = () => {
                                                     onClick={clearSearch}
                                                     className="flex items-center gap-3 p-3 hover:bg-blue-50 transition-colors border-b border-gray-50 last:border-b-0"
                                                 >
-                                                    <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+                                                    <div className="w-14 h-14 rounded-lg overflow-hidden bg-gray-100 shrink-0">
                                                         {product.variants?.[0]?.images?.[0] ? (
                                                             <Image
                                                                 height={56}
@@ -294,6 +296,17 @@ const Navbar = () => {
                                         </svg>
                                         My Profile
                                     </Link>
+                                    {session?.user?.role === 'admin' && (
+                                        <Link
+                                            href="/add-product"
+                                            className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                                        >
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                                            </svg>
+                                            Add Product
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -371,7 +384,7 @@ const Navbar = () => {
                                             }}
                                             className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors"
                                         >
-                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-200 flex-shrink-0">
+                                            <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-200 shrink-0">
                                                 {product.variants?.[0]?.images?.[0] && (
                                                     <Image
                                                         height={40}

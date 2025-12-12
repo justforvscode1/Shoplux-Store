@@ -12,13 +12,6 @@ cloudinary.config({
 
 export async function POST(req) {
     try {
-        // Debug logging
-        console.log("Cloudinary Config Check:", {
-            cloud_name: !!process.env.CLOUDINARY_CLOUD_NAME,
-            api_key: !!process.env.CLOUDINARY_API_KEY,
-            api_secret: !!process.env.CLOUDINARY_API_SECRET,
-        });
-
         const formData = await req.formData();
         const files = formData.getAll("files");
         const productName = formData.get("productName") || "product";

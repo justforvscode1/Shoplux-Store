@@ -70,7 +70,7 @@ export default function Home() {
         const getreviews = await fetch("/api/review")
         const reviewresponse = await getreviews.json()
         setreviews(reviewresponse)
-        console.log("Fetched reviews:", reviewresponse)
+
       } catch (error) {
         console.error("Error fetching products:", error)
       } finally {
@@ -110,11 +110,11 @@ export default function Home() {
       <Navbar />
       <div className="min-h-screen bg-gray-50">
         {/* Hero Section - Enhanced Mobile Responsive */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50">
+        <section className="relative overflow-hidden bg-linear-to-br from-slate-50 via-blue-50/30 to-indigo-50">
           {/* Background decoration - contained within section */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute -top-1/2 -right-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] bg-gradient-to-br from-blue-200/30 to-purple-200/30 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-1/4 -left-1/4 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] bg-gradient-to-tr from-indigo-200/25 to-pink-200/25 rounded-full blur-3xl"></div>
+            <div className="absolute -top-1/2 -right-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[700px] lg:h-[700px] bg-linear-to-br from-blue-200/30 to-purple-200/30 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-1/4 -left-1/4 w-[250px] h-[250px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] bg-linear-to-tr from-indigo-200/25 to-pink-200/25 rounded-full blur-3xl"></div>
           </div>
 
           {heroSlides.map((slide, index) => (
@@ -134,12 +134,12 @@ export default function Home() {
                   <div className={`w-full lg:w-1/2 lg:order-2 transition-all duration-700 delay-100 ${index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}>
                     <div className="relative mx-auto max-w-[180px] sm:max-w-[280px] lg:max-w-[400px]">
                       {/* Decorative elements - smaller on mobile */}
-                      <div className="absolute -inset-3 sm:-inset-5 lg:-inset-6 bg-gradient-to-br from-blue-400/15 via-purple-400/15 to-pink-400/15 rounded-2xl sm:rounded-3xl transform rotate-3 blur-sm"></div>
-                      <div className="absolute -inset-1.5 sm:-inset-2 lg:-inset-3 bg-gradient-to-tl from-indigo-400/10 to-cyan-400/10 rounded-xl sm:rounded-2xl transform -rotate-2"></div>
+                      <div className="absolute -inset-3 sm:-inset-5 lg:-inset-6 bg-linear-to-br from-blue-400/15 via-purple-400/15 to-pink-400/15 rounded-2xl sm:rounded-3xl transform rotate-3 blur-sm"></div>
+                      <div className="absolute -inset-1.5 sm:-inset-2 lg:-inset-3 bg-linear-to-tl from-indigo-400/10 to-cyan-400/10 rounded-xl sm:rounded-2xl transform -rotate-2"></div>
 
                       {/* Main image container */}
                       <div className="relative bg-white/90 backdrop-blur-sm p-2 sm:p-3 lg:p-4 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-lg sm:shadow-xl">
-                        <div className="relative aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden">
+                        <div className="relative aspect-4/3 bg-linear-to-br from-gray-50 to-gray-100 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden">
                           <Image
                             width={500}
                             height={400}
@@ -153,7 +153,7 @@ export default function Home() {
                         {/* Floating badge - hidden on very small screens */}
                         <div className="hidden xs:block absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 bg-white rounded-lg sm:rounded-xl shadow-lg px-2 py-1 sm:px-3 sm:py-2">
                           <div className="flex items-center gap-1.5 sm:gap-2">
-                            <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                            <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center">
                               <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                               </svg>
@@ -191,7 +191,7 @@ export default function Home() {
                     {/* CTA Button */}
                     <div className={`mt-4 sm:mt-5 lg:mt-6 transition-all duration-700 delay-400 ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
                       <Link href={`/products/${slide.buttonText.slice(5).toLowerCase()}/all`}>
-                        <button className="group bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm lg:text-base hover:from-blue-700 hover:to-blue-800 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-blue-500/25 inline-flex items-center gap-1.5 sm:gap-2">
+                        <button className="group bg-linear-to-r from-blue-600 to-blue-700 text-white px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm lg:text-base hover:from-blue-700 hover:to-blue-800 active:scale-[0.98] transition-all duration-200 shadow-lg shadow-blue-500/25 inline-flex items-center gap-1.5 sm:gap-2">
                           {slide.buttonText}
                           <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -237,7 +237,7 @@ export default function Home() {
             {/* Horizontal swipeable on mobile, grid on tablet+ */}
             <div className="flex sm:grid sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-8 overflow-x-auto sm:overflow-visible snap-x snap-mandatory pb-2 sm:pb-0 -mx-3 px-3 sm:mx-0 sm:px-0 scrollbar-hide">
               {categories.map((category, index) => (
-                <Link href={`products/${category.name}/all`} key={category.name} className="flex-shrink-0 w-[85%] sm:w-full snap-center">
+                <Link href={`products/${category.name}/all`} key={category.name} className="shrink-0 w-[85%] sm:w-full snap-center">
                   <div
                     className={`group relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl cursor-pointer transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl h-full ${isVisible['section-categories']
                       ? `opacity-100 translate-y-0`
@@ -251,7 +251,7 @@ export default function Home() {
                         alt={category.name}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/70 transition-all duration-300"></div>
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/70 transition-all duration-300"></div>
 
                       {/* Category info overlay */}
                       <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 lg:p-6 text-white">
@@ -296,8 +296,8 @@ export default function Home() {
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-0.5 sm:mb-1 lg:mb-2">
                   Featured Products
                 </h2>
-                <p className="text-xs sm:text-sm lg:text-lg text-gray-600">
-                  Handpicked items just for you
+                <p className="text-xs sm:text-sm lg:text-lg pl-2.5 font-medium text-gray-600">
+                  our latest items 
                 </p>
               </div>
               {/* <Link href="/products" className="hidden sm:flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm lg:text-base shrink-0">
@@ -328,7 +328,7 @@ export default function Home() {
                   const productSlug = product.name?.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-');
                   const imageSrc = productImage || `/uploads/products/${productSlug}.png`;
                   return (
-                    <Link key={product.productid} href={`/product/${product.productid}`} className="flex-shrink-0 w-[75%] sm:w-[48%] lg:w-full snap-center">
+                    <Link key={product.productid} href={`/product/${product.productid}`} className="shrink-0 w-[75%] sm:w-[48%] lg:w-full snap-center">
                       <div
                         className={`group bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl lg:hover:shadow-2xl transition-all duration-500 lg:hover:-translate-y-2 h-full ${isVisible['section-products']
                           ? `opacity-100 translate-y-0`
@@ -337,7 +337,7 @@ export default function Home() {
                         style={{ transitionDelay: `${index * 100}ms` }}
                       >
                         {/* Product Image */}
-                        <div className="relative overflow-hidden rounded-t-xl sm:rounded-t-2xl h-36 sm:h-48 lg:h-64 bg-gradient-to-br from-gray-100 to-gray-200">
+                        <div className="relative overflow-hidden rounded-t-xl sm:rounded-t-2xl h-36 sm:h-48 lg:h-64 bg-linear-to-br from-gray-100 to-gray-200">
                           {imageSrc ? (
                             <Image
                               src={imageSrc}

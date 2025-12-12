@@ -7,8 +7,9 @@ import LoadingScreen from '@/components/LoadingScreen';
 import React, { useState, useEffect, use, useCallback } from 'react';
 
 const CategoryWiseProducts = ({ params }) => {
-    const type = decodeURIComponent(use(params).type);
-    const Category = decodeURIComponent(use(params).category.toLocaleLowerCase());
+    const paramsData = use(params);
+    const type = decodeURIComponent(paramsData.type);
+    const Category = decodeURIComponent(paramsData.category.toLocaleLowerCase());
     const [activeCategory, setActiveCategory] = useState((type).toLocaleLowerCase());
     const [isLoading, setIsLoading] = useState(true);
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -35,7 +36,7 @@ const CategoryWiseProducts = ({ params }) => {
         const gettheproducts = async () => {
             const allproducts = await fetch(`/api/products`);
             const response = await allproducts.json();
-            setproducts(response.filter(items => items.category === Category));
+            setproducts(response.filter(items => items.category.toLowerCase() === Category));
 
             // Fetch reviews
             const reviewsRes = await fetch('/api/review');
@@ -44,6 +45,10 @@ const CategoryWiseProducts = ({ params }) => {
         };
         gettheproducts();
     }, [Category]);
+
+    useEffect(() => {
+        setActiveCategory(type.toLowerCase());
+    }, [type]);
 
     useEffect(() => {
         if (Category === "fashion") {
@@ -96,16 +101,16 @@ const CategoryWiseProducts = ({ params }) => {
                     filtered.sort((a, b) => b.variants[0].price - a.variants[0].price);
                     break;
                 case 'rating':
-                    filtered.sort((a, b) => getAvgRating(b.productid) - getAvgRating(a.productid));
+                    filtered.sort((a, b) => getAvgRating(b._id) - getAvgRating(a._id));
                     break;
                 case 'newest':
-                    // Sort by productid descending (assuming newer products have higher IDs)
-                    filtered.sort((a, b) => b.productid.localeCompare(a.productid));
+                    // Sort by _id descending (assuming newer products have higher IDs)
+                    filtered.sort((a, b) => b._id.localeCompare(a._id));
                     break;
                 case 'most-reviews':
                     filtered.sort((a, b) => {
-                        const aReviews = reviews.filter(r => r.productId === a.productid).length;
-                        const bReviews = reviews.filter(r => r.productId === b.productid).length;
+                        const aReviews = reviews.filter(r => r.productId === a._id).length;
+                        const bReviews = reviews.filter(r => r.productId === b._id).length;
                         return bReviews - aReviews;
                     });
                     break;
@@ -202,7 +207,7 @@ const CategoryWiseProducts = ({ params }) => {
                             </div>
                             <button
                                 onClick={() => setShowFilterModal(true)}
-                                className="flex-shrink-0 flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 md:py-2.5 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 active:bg-gray-100 transition-all relative"
+                                className="shrink-0 flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2 md:py-2.5 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 active:bg-gray-100 transition-all relative"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -261,15 +266,15 @@ const CategoryWiseProducts = ({ params }) => {
                             <LoadingScreen
                                 fullScreen={false}
                                 message=""
-                                className="absolute inset-0 z-20 !bg-white/75 rounded-xl !min-h-0"
+                                className="absolute inset-0 z-20 bg-white/75! rounded-xl min-h-0!"
                             />
                         )}
 
                         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
                             {filteredProducts.map((product, index) => {
-                                const avgRating = getAvgRating(product.productid);
+                                const avgRating = getAvgRating(product._id);
                                 return (
-                                    <Link href={`/product/${product.productid}`} key={product.productid}>
+                                    <Link href={`/product/${product._id}`} key={product._id}>
                                         <div
                                             className="group bg-white rounded-xl sm:rounded-2xl shadow-sm sm:shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg sm:hover:shadow-xl hover:-translate-y-1 h-full"
                                             style={{ animation: `fadeInUp 0.5s ease-out ${index * 0.05}s both` }}

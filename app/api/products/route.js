@@ -29,3 +29,19 @@ export async function POST(req) {
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
+export async function DELETE(req) {
+    try {
+        const body = await req.json();
+        await dbConnect();
+        // ✅ You decide validation rules here
+        if (!body) {
+            return NextResponse.json({ error: "productid is required" }, { status: 400 });
+        }
+
+        const result = await Products.deleteOne(body);
+
+        return NextResponse.json(result, { status: 201 });
+    } catch (err) {
+        return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+}

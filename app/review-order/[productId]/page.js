@@ -135,7 +135,7 @@ export default function ProductReviewPage({ params }) {
 
   if (submitSuccess) {
     return (
-      <div className="min-h-dvh bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center p-4 sm:p-6">
+      <div className="min-h-dvh bg-linear-to-b from-gray-50 to-gray-100 flex items-center justify-center p-4 sm:p-6">
         <div
           className="text-center bg-white rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 w-full max-w-sm sm:max-w-md mx-auto animate-[fadeIn_0.3s_ease-out]"
           role="alert"
@@ -160,10 +160,10 @@ export default function ProductReviewPage({ params }) {
   }
 
   return (
-    <div className=" min-h-dvh bg-gradient-to-b from-gray-50 to-gray-100 flex flex-col">
+    <div className=" min-h-dvh bg-linear-to-b from-gray-50 to-gray-100 flex flex-col">
       <Navbar />
 
-      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-10 lg:py-12 flex-grow w-full">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8   md:py-10 lg:py-12 grow w-full">
         <form
           onSubmit={handleSubmit}
           className="bg-white rounded-2xl shadow-lg border border-gray-100 p-5 sm:p-6 md:p-8 lg:p-10"
@@ -201,7 +201,7 @@ export default function ProductReviewPage({ params }) {
             </p>
             {errors.rating && (
               <p className="mt-2 text-xs sm:text-sm text-red-600 flex items-center gap-1" role="alert">
-                <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
                 {errors.rating}
@@ -233,7 +233,7 @@ export default function ProductReviewPage({ params }) {
               <div className="flex-1">
                 {errors.title && (
                   <p id="title-error" className="text-xs sm:text-sm text-red-600 flex items-center gap-1" role="alert">
-                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
                     {errors.title}
@@ -268,7 +268,7 @@ export default function ProductReviewPage({ params }) {
               <div className="flex-1">
                 {errors.comment && (
                   <p id="comment-error" className="text-xs sm:text-sm text-red-600 flex items-center gap-1" role="alert">
-                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
                     {errors.comment}
@@ -341,7 +341,7 @@ export default function ProductReviewPage({ params }) {
 
             {errors.images && (
               <p className="mt-3 text-xs sm:text-sm text-red-600 flex items-center gap-1" role="alert">
-                <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
                 {errors.images}
@@ -353,7 +353,7 @@ export default function ProductReviewPage({ params }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3.5 sm:py-4 md:py-5 px-6 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none disabled:shadow-lg touch-manipulation"
+            className="w-full bg-linear-to-r from-blue-600 to-blue-700 text-white py-3.5 sm:py-4 md:py-5 px-6 rounded-xl font-semibold text-sm sm:text-base md:text-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none disabled:shadow-lg touch-manipulation"
           >
             {isSubmitting ? (
               <span className="flex items-center justify-center gap-2 sm:gap-3">
@@ -368,7 +368,7 @@ export default function ProductReviewPage({ params }) {
         </form>
 
         {/* Guidelines Card */}
-        <aside className="mt-6 sm:mt-8 p-4 sm:p-5 md:p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 shadow-sm">
+        <aside className="mt-6 sm:mt-8 p-4 sm:p-5 md:p-6 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100 shadow-sm">
           <h3 className="text-sm sm:text-base md:text-lg font-semibold text-blue-900 mb-3 flex items-center gap-2">
             <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
