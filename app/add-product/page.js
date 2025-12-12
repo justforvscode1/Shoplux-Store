@@ -154,7 +154,7 @@ const AddProductPage = () => {
                 formData.append('files', img.file);
             }
         });
-
+        console.log(formData);
         const response = await fetch('/api/upload', {
             method: 'POST',
             body: formData,
@@ -243,7 +243,7 @@ const AddProductPage = () => {
             }
 
             toast.success('Product created successfully!', { position: 'top-center' });
-            router.push('/dashboard');
+            router.push('/');
 
         } catch (error) {
             console.error('Error creating product:', error);
@@ -258,7 +258,7 @@ const AddProductPage = () => {
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Navbar />
 
-            <main className="flex-grow">
+            <main className="grow">
                 {/* Header */}
                 <div className="bg-white border-b border-gray-200">
                     <div className="max-w-5xl mx-auto px-3 sm:px-4 lg:px-6">

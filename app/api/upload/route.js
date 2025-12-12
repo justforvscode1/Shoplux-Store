@@ -1,20 +1,24 @@
 import { NextResponse } from "next/server";
-import { writeFile, mkdir } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
+import { v2 as cloudinary } from 'cloudinary';
 
-// Helper to create URL-safe slug from product name
-const createSlug = (name) => {
-    return name
-        .toLowerCase()
-        .trim()
-        .replace(/[^\w\s-]/g, '') // Remove special characters
-        .replace(/\s+/g, '-')     // Replace spaces with hyphens
-        .replace(/-+/g, '-');     // Replace multiple hyphens with single
-};
+// ... imports
+
+// Configure Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(req) {
     try {
+        // Debug logging
+        console.log("Cloudinary Config Check:", {
+            cloud_name: !!process.env.CLOUDINARY_CLOUD_NAME,
+            api_key: !!process.env.CLOUDINARY_API_KEY,
+            api_secret: !!process.env.CLOUDINARY_API_SECRET,
+        });
+
         const formData = await req.formData();
         const files = formData.getAll("files");
         const productName = formData.get("productName") || "product";
@@ -23,31 +27,35 @@ export async function POST(req) {
             return NextResponse.json({ error: "No files provided" }, { status: 400 });
         }
 
-        const uploadDir = path.join(process.cwd(), "public", "uploads", "products");
-
-        // Create directory if it doesn't exist
-        if (!existsSync(uploadDir)) {
-            await mkdir(uploadDir, { recursive: true });
-        }
-
         const uploadedUrls = [];
-        const slug = createSlug(productName);
 
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
+        for (const file of files) {
             if (!file || typeof file === "string") continue;
 
             const bytes = await file.arrayBuffer();
             const buffer = Buffer.from(bytes);
 
-            // Generate filename with only product name
-            const extension = file.name.split(".").pop();
-            const imageIndex = files.length > 1 ? `-${i + 1}` : '';
-            const filename = `${slug}${imageIndex}.${extension}`;
-            const filepath = path.join(uploadDir, filename);
+            // Upload via stream
+            const uploadResult = await new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream(
+                    {
+                        folder: "products",
+                        public_id: `${productName.trim().replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`,
+                        resource_type: "auto",
+                    },
+                    (error, result) => {
+                        if (error) {
+                            console.error("Cloudinary upload error:", error);
+                            reject(error);
+                        } else {
+                            resolve(result);
+                        }
+                    }
+                );
+                uploadStream.end(buffer);
+            });
 
-            await writeFile(filepath, buffer);
-            uploadedUrls.push(`/uploads/products/${filename}`);
+            uploadedUrls.push(uploadResult.secure_url);
         }
 
         return NextResponse.json({
@@ -56,7 +64,9 @@ export async function POST(req) {
         });
 
     } catch (error) {
-        console.error("Upload error:", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("Upload route error:", error); // Improved logging
+        return NextResponse.json({ error: error.message || "Unknown server error" }, { status: 500 });
     }
 }
+
+
